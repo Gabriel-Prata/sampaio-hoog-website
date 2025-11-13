@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+  <title>Sampaio & Hoog</title>
+  <link rel="icon" type="image/x-icon" href="{% static 'logo/favicon.png' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'azul-petroleo': '#0A4F6B',
+            'cinza-geada': '#F0F2F5',
+          },
+          // ADICIONE ESTA SEÇÃO DE FONTES
+          fontFamily: {
+            // Define 'sans' como nossa fonte principal (corpo)
+            'sans': ['Lato', 'sans-serif'],
+            // Define 'serif' como nossa fonte de títulos
+            'serif': ['Playfair Display', 'serif'],
+            // fonte de sampaio e hoog
+            'montserrat': ['Montserrat', 'sans-serif']
+          },
+          backgroundImage: {
+            'radial-light': 'radial-gradient(ellipse at center, var(--tw-gradient-stops))',
+          }
+        }
+      }
+    }
+  </script>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
+</head>
+
+<body class="bg-cinza-geada text-gray-800 font-sans">
+
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+
+
+
+
+
+
+
+<!-- EFEITOS FADE IN -->
+
+
+
+  <style>
+
+  .section-hidden {
+    opacity: 0;
+    transform: translateY(38px);
+  }
+</style>
+
+<script>
+  // Espera o HTML ser carregado
+  document.addEventListener("DOMContentLoaded", () => {
+    
+    // 1. Configura o Observador
+    const observer = new IntersectionObserver((entries) => {
+      // Loop por todas as seções que estão sendo observadas
+      entries.forEach((entry) => {
+        // Se a seção entrou na tela (isIntersecting)
+        if (entry.isIntersecting) {
+          // Remove a classe 'section-hidden'.
+          // A classe de 'transition' do Tailwind fará o resto.
+          entry.target.classList.remove('section-hidden');
+          
+          // Para de observar esta seção (para a animação não repetir)
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15 // Dispara quando x% da seção estiver visível
+    });
+
+    // 2. Pega todas as seções que queremos animar
+    const sectionsToAnimate = document.querySelectorAll('.scroll-reveal-section');
+    
+    // 3. Inicia a observação em cada seção
+    sectionsToAnimate.forEach((section) => {
+      observer.observe(section);
+    });
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+/.env
+.venv/
+
+# Django
+*.sqlite3
+/staticfiles/
+/media/
+
+# Node
+node_modules/
+/dist/
+
+# Editor / Sistema
+.vscode/
+.DS_Store
+EOF
+
+# 3.3. Primeiro commit
+git add .
+git commit -m "chore: projeto Django inicial com Poetry e Python 3.13"
+
+#tailwindcss
+static/css/input.css

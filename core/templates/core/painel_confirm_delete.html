@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include 'partials/header.html' %}
+
+<div class="min-h-screen bg-gray-50 py-10 flex items-center justify-center px-4">
+    <div class="max-w-xl w-full bg-white rounded-lg shadow-lg border border-gray-100 p-8 transform transition-all duration-300 hover:scale-[1.01]">
+        
+        <div class="text-center">
+            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100 mb-6">
+                <i class="fas fa-exclamation-triangle text-3xl text-red-600"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 font-serif mb-2">Excluir Página</h2>
+            <p class="text-gray-500 mb-8 max-w-sm mx-auto">
+                Tem certeza de que deseja excluir a página <strong>"{{ object.titulo }}"</strong>?<br> 
+                Esta ação <span class="text-red-600 font-semibold">não pode</span> ser desfeita.
+            </p>
+        </div>
+
+        <form method="post" class="flex justify-center gap-4 border-t border-gray-100 pt-6">
+            {% csrf_token %}
+            <a href="{% url 'core:painel_list' %}" class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-medium py-3 px-8 rounded-md transition duration-300 shadow-sm">
+                Cancelar
+            </a>
+            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-8 rounded-md transition duration-300 shadow-md flex items-center gap-2">
+                <i class="fas fa-trash-alt"></i> Sim, Excluir
+            </button>
+        </form>
+    </div>
+</div>
+
+{% include 'partials/footer.html' %}
+{% endblock %}

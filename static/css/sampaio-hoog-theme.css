@@ -1,0 +1,257 @@
+/**
+ * Sampaio & Hoog Advocacia - Base de Estilos Oficiais (Design System)
+ * 
+ * Este arquivo funciona como um "Style Guide" contendo todas as variáveis
+ * essenciais para reproduzir o visual limpo, sofisticado e profissional da empresa
+ * em qualquer aplicação futura, independente do uso do TailwindCSS.
+ */
+
+:root {
+    /* ========================================= */
+    /* 1. PALETA DE CORES OFICIAL (COLORS)       */
+    /* ========================================= */
+    
+    /* Cores Primárias (Identidade Principal) */
+    --color-primary: #0A4F6B;        /* Azul Petróleo - Transmite seriedade e confiança */
+    --color-primary-light: #126687;  /* Variante mais clara para hovers */
+    --color-primary-dark: #063A50;   /* Variante mais escura para sombras textuais e bordas */
+    
+    /* Cores Secundárias e Destaques */
+    --color-accent: #EAB308;         /* Amarelo/Dourado - Usado para links do Painel e detalhes (Opcional) */
+    --color-accent-hover: #CA8A04;
+    
+    /* Tons de Fundo (Backgrounds) */
+    --color-bg-base: #F0F2F5;        /* Cinza Geada - Cor padrão de fundo do corpo do site */
+    --color-bg-white: #FFFFFF;       /* Para cartões e containers limpos */
+    --color-bg-offwhite: #F9FAFB;    /* Variante sutil para intercalar seções */
+    
+    /* Tons de Texto (Typographic Colors) */
+    --color-text-main: #1F2937;      /* Tailwind gray-800 - Leitura confortável, menos agressivo que preto puro */
+    --color-text-muted: #6B7280;     /* Tailwind gray-500 - Descrições secundárias e datas */
+    --color-text-light: #9CA3AF;     /* Tailwind gray-400 - Footers, avisos leves */
+    --color-border: #E5E7EB;         /* Tailwind gray-200 - Bordas de divisão finas */
+
+    /* ========================================= */
+    /* 2. TIPOGRAFIA (TYPOGRAPHY)                */
+    /* ========================================= */
+    
+    /* Font Families: Cada uma tem um propósito específico */
+    --font-sans: 'Lato', system-ui, -apple-system, sans-serif;          /* Corpo de texto principal. Legível e moderna. */
+    --font-serif: 'Playfair Display', Georgia, Cambria, serif;          /* Títulos principais. Dá o ar advocatício tradicional e elegante. */
+    --font-brand: 'Montserrat', system-ui, sans-serif;                /* Letreiros da logo e seções da Home, bem geométrica. */
+    
+    /* Pesos (Font Weights) */
+    --weight-normal: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+    --weight-black: 900;
+    
+    /* Tamanhos (Font Sizes - Scale) */
+    --text-xs: 0.75rem;    /* 12px */
+    --text-sm: 0.875rem;   /* 14px */
+    --text-base: 1rem;     /* 16px */
+    --text-lg: 1.125rem;   /* 18px */
+    --text-xl: 1.25rem;    /* 20px */
+    --text-2xl: 1.5rem;    /* 24px */
+    --text-3xl: 1.875rem;  /* 30px */
+    --text-4xl: 2.25rem;   /* 36px */
+
+    /* ========================================= */
+    /* 3. ESPAÇAMENTOS E BORDAS (LAYOUT)         */
+    /* ========================================= */
+    
+    /* Bordas e Arredondamentos (Radii) */
+    --radius-sm: 0.25rem;  /* 4px - Inputs, botões menores */
+    --radius-md: 0.375rem; /* 6px - Botões padrão */
+    --radius-lg: 0.5rem;   /* 8px - Cartões de serviço */
+    --radius-xl: 1rem;     /* 16px - Blocos muito grandes, call-to-actions */
+
+    /* Sombras (Box Shadows - Suaves para um visual "Glass/Premium") */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+    /* Transições de Padrão (Smoothness) */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 300ms ease-in-out;
+}
+
+/* ========================================= */
+/* UTILITÁRIOS BASE (NORMALIZAÇÃO)           */
+/* ========================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--color-bg-base);
+    color: var(--color-text-main);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* ========================================= */
+/* FAMÍLIAS DE CABEÇALHO (HEADINGS)          */
+/* ========================================= */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    color: var(--color-primary); /* Azul principal é nativo dos títulos */
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-weight: var(--weight-bold);
+    line-height: 1.2;
+}
+
+h1 { font-size: var(--text-4xl); }
+h2 { font-size: var(--text-3xl); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+
+/* Para a logo / chamadas ultra-modernas: */
+.font-brand {
+    font-family: var(--font-brand) !important;
+}
+
+p {
+    margin-bottom: 1.25rem;
+    color: var(--color-text-main);
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
+
+a:hover {
+    color: var(--color-primary-light);
+}
+
+/* ========================================= */
+/* COMPONENTES DE PADRÃO OFICIAL             */
+/* ========================================= */
+
+/* 1. Botões Oficiais */
+.sh-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-size: var(--text-base);
+    font-weight: var(--weight-medium);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    border: 1px solid transparent;
+}
+
+.sh-btn-primary {
+    background-color: var(--color-primary);
+    color: white !important;
+    box-shadow: var(--shadow-sm);
+}
+
+.sh-btn-primary:hover {
+    background-color: var(--color-primary-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.sh-btn-outline {
+    background-color: transparent;
+    border-color: var(--color-primary);
+    color: var(--color-primary) !important;
+}
+
+.sh-btn-outline:hover {
+    background-color: var(--color-bg-base);
+}
+
+/* 2. Cartões Clássicos (Services/Posts) */
+.sh-card {
+    background-color: var(--color-bg-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.sh-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* 3. Seções Padronizadas */
+.sh-section {
+    padding: 5rem 1rem; /* Adapte no layout final */
+    background-color: var(--color-bg-base); /* ou white */
+}
+
+.sh-section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: var(--text-4xl);
+}
+
+/* ========================================= */
+/* MÓDULOS ESPECÍFICOS DE INTERFACE          */
+/* ========================================= */
+
+/* Barra de Destaque Inferior em Títulos (Ex: "Leia Também") */
+.sh-title-underline {
+    position: relative;
+    display: inline-block;
+}
+
+.sh-title-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3rem;
+    height: 4px;
+    background-color: var(--color-primary);
+    border-radius: 9999px;
+}
+
+/* Campos de Formulário Padronizados */
+.sh-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    color: var(--color-text-main);
+    background-color: var(--color-bg-white);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.sh-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(10, 79, 107, 0.2);
+}
+
+/* Footer Sampaio & Hoog (Para aplicações sem Tailwind) */
+.sh-footer {
+    background-color: var(--color-primary);
+    color: var(--color-bg-base);
+    padding: 3rem 1rem;
+}
+
+.sh-footer a {
+    color: var(--color-bg-base);
+    opacity: 0.8;
+}
+
+.sh-footer a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}

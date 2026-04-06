@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- SCROLL PROGRESS BAR -->
+<div class="fixed top-0 left-0 w-full h-1 bg-transparent z-[100]">
+    <div id="scroll-progress" class="h-full bg-azul-petroleo transition-all duration-100 ease-out w-0 shadow-[0_0_10px_rgba(10,79,107,0.8)]"></div>
+</div>
+
+{% include 'partials/header.html' %}
+
+<article class="min-h-screen pt-10 pb-20 bg-white">
+    <!-- CONTEÚDO DA PÁGINA (Livre para HTML/Tailwind) -->
+    <div class="page-content">
+        {{ page.conteudo|safe }}
+    </div>
+
+    <!-- SUGESTÕES DE LEITURA (Apenas se >= 3 posts recentes) -->
+    {% if recent_pages|length >= 3 %}
+    <section class="max-w-6xl mx-auto px-4 mt-24 pt-16 border-t border-gray-100 bg-gray-50/50 rounded-3xl pb-8 mb-10">
+        <h3 class="text-3xl font-bold text-azul-petroleo font-serif mb-12 text-center relative">
+            <span class="inline-block relative">
+                Leia Também
+                <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-blue-600 rounded-full"></div>
+            </span>
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for rp in recent_pages %}
+            <a href="/{{ rp.slug }}/" class="group bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:-translate-y-2 h-full">
+                <div>
+                    <div class="text-xs text-blue-600 font-semibold uppercase tracking-wider mb-3 flex items-center gap-2">
+                        <i class="far fa-calendar-alt"></i> {{ rp.criado_em|date:"d M Y" }}
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 font-serif leading-snug group-hover:text-azul-petroleo transition-colors">
+                        {{ rp.titulo }}
+                    </h4>
+                </div>
+                
+                <div class="mt-8 flex items-center text-azul-petroleo font-semibold text-sm group-hover:translate-x-2 transition-transform duration-300">
+                    Ler artigo <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</article>
+
+{% include 'partials/footer.html' %}
+
+<!-- BOTÃO VOLTAR AO TOPO -->
+<button id="back-to-top" class="fixed bottom-6 left-6 z-50 bg-azul-petroleo text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transform translate-y-20 opacity-0 transition-all duration-500 ease-in-out hover:bg-opacity-90 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-azul-petroleo" aria-label="Voltar ao topo">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const progressBar = document.getElementById('scroll-progress');
+    const backToTopBtn = document.getElementById('back-to-top');
+
+    function updateScroll() {
+        // Cálculo do progresso
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollPercent = (scrollTop / scrollHeight) * 100;
+        
+        // Atualiza a barra de progresso
+        if (progressBar) {
+            progressBar.style.width = scrollPercent + '%';
+        }
+
+        // Exibe ou esconde o botão de Voltar ao Topo (em 70% ou mais)
+        if (backToTopBtn) {
+            if (scrollPercent >= 70) {
+                backToTopBtn.classList.remove('translate-y-20', 'opacity-0');
+                backToTopBtn.classList.add('translate-y-0', 'opacity-100');
+            } else {
+                backToTopBtn.classList.add('translate-y-20', 'opacity-0');
+                backToTopBtn.classList.remove('translate-y-0', 'opacity-100');
+            }
+        }
+    }
+
+    // Listener de scroll (com um throttle super simples pra performance)
+    let isScrolling = false;
+    window.addEventListener('scroll', function() {
+        if (!isScrolling) {
+            window.requestAnimationFrame(function() {
+                updateScroll();
+                isScrolling = false;
+            });
+            isScrolling = true;
+        }
+    });
+
+    // Ação de clicar para voltar
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+});
+</script>
+{% endblock %}

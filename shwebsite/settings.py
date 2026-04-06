@@ -1,12 +1,13 @@
 from pathlib import Path
 from decouple import config, Csv
+import dj_database_url
 
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv(), default=[])
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv(), default='')
 
 
 # Application definition
@@ -57,10 +58,11 @@ WSGI_APPLICATION = 'shwebsite.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': config(
+        'DATABASE_URL',
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        cast=dj_database_url.parse
+    )
 }
 
 
@@ -119,3 +121,6 @@ AUTHENTICATION_BACKENDS = [
     # Necessário para logar no admin com username/password
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+LOGIN_URL = 'core:login'
+LOGIN_REDIRECT_URL = 'core:painel_list'
